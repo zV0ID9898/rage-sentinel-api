@@ -1,5 +1,3 @@
-
-
 require("dotenv").config();
 
 const express = require("express");
@@ -18,9 +16,12 @@ const client = new Client({
     GatewayIntentBits.GuildMembers
   ]
 });
+
 app.get("/auth/discord/test", (req, res) => {
   res.send("OAuth funcionando");
 });
+
+app.get("/auth/discord", (req, res) => {
 
   const params = new URLSearchParams({
     client_id: process.env.DISCORD_CLIENT_ID,
@@ -28,19 +29,21 @@ app.get("/auth/discord/test", (req, res) => {
     response_type: "code",
     scope: "identify"
   });
-  
+
   res.redirect(
     `https://discord.com/oauth2/authorize?${params}`
   );
 
 });
+
 client.once("ready", () => {
   console.log(`BOT ONLINE: ${client.user.tag}`);
 });
-console.log("TOKEN:", process.env.DISCORD_BOT_TOKEN ? "SI EXISTE" : "NO EXISTE");
-console.log("RAGE_SERVER_ID:", process.env.RAGE_SERVER_ID);
-console.log("TOKEN:", process.env.DISCORD_BOT_TOKEN);
-console.log("TOKEN EXISTE:", !!process.env.DISCORD_BOT_TOKEN);
+
+console.log(
+  "TOKEN:",
+  process.env.DISCORD_BOT_TOKEN ? "SI EXISTE" : "NO EXISTE"
+);
 
 client.login(process.env.DISCORD_BOT_TOKEN);
 
@@ -49,11 +52,12 @@ app.get("/validate/:userid", async (req, res) => {
   try {
 
     const userId = req.params.userid;
+
     if (!/^\d{17,20}$/.test(userId)) {
-  return res.status(400).json({
-    error: "Discord ID inválido"
-  });
-}
+      return res.status(400).json({
+        error: "Discord ID inválido"
+      });
+    }
 
     const rageGuild = await client.guilds.fetch(
       process.env.RAGE_SERVER_ID
