@@ -72,10 +72,12 @@ app.get("/auth/discord/callback", async (req, res) => {
 
     const user = userRes.data;
 
-    res.json({
-      discordId: user.id,
-      username: user.username
-    });
+    const FRONTEND_URL =
+  "https://TU-FRONTEND.com";
+
+res.redirect(
+  `http://localhost:3000/?discordId=${user.id}`
+);
 
   } catch (err) {
 
