@@ -1,7 +1,10 @@
 
 
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
+const axios = require("axios");
 const { Client, GatewayIntentBits } = require("discord.js");
 
 const app = express();
@@ -15,7 +18,22 @@ const client = new Client({
     GatewayIntentBits.GuildMembers
   ]
 });
+app.get("/auth/discord/test", (req, res) => {
+  res.send("OAuth funcionando");
+});
 
+  const params = new URLSearchParams({
+    client_id: process.env.DISCORD_CLIENT_ID,
+    redirect_uri: process.env.DISCORD_REDIRECT_URI,
+    response_type: "code",
+    scope: "identify"
+  });
+  
+  res.redirect(
+    `https://discord.com/oauth2/authorize?${params}`
+  );
+
+});
 client.once("ready", () => {
   console.log(`BOT ONLINE: ${client.user.tag}`);
 });
