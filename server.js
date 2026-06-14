@@ -1,6 +1,4 @@
-require("dotenv").config({
-  path: __dirname + "/.env"
-});
+
 
 const express = require("express");
 const cors = require("cors");
@@ -21,6 +19,8 @@ const client = new Client({
 client.once("ready", () => {
   console.log(`BOT ONLINE: ${client.user.tag}`);
 });
+console.log("TOKEN:", process.env.DISCORD_BOT_TOKEN ? "SI EXISTE" : "NO EXISTE");
+console.log("RAGE_SERVER_ID:", process.env.RAGE_SERVER_ID);
 console.log("TOKEN:", process.env.DISCORD_BOT_TOKEN);
 console.log("TOKEN EXISTE:", !!process.env.DISCORD_BOT_TOKEN);
 
