@@ -70,8 +70,7 @@ app.get("/auth/discord/callback", async (req, res) => {
       }
     );
 
-    const user = userRes.data;
-
+   const user = userRes.data;
 
 res.send(`
 <!DOCTYPE html>
@@ -123,7 +122,18 @@ setTimeout(() => {
 </html>
 `);
 
+} catch (err) {
+
+  console.error(err);
+
+  res.status(500).json({
+    error: "OAuth error"
+  });
+
+}
+
 });
+
 client.once("ready", () => {
   console.log(`BOT ONLINE: ${client.user.tag}`);
 });
