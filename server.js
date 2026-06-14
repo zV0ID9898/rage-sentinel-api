@@ -35,7 +35,13 @@ app.get("/auth/discord", (req, res) => {
   );
 
 });
+app.get("/auth/discord/callback", async (req, res) => {
 
+  const code = req.query.code;
+
+  res.send("Discord OAuth funcionando");
+
+});
 client.once("ready", () => {
   console.log(`BOT ONLINE: ${client.user.tag}`);
 });
