@@ -76,7 +76,7 @@ app.get("/auth/discord/callback", async (req, res) => {
   "https://TU-FRONTEND.com";
 
 res.redirect(
-  `http://localhost:3000/?discordId=${user.id}&username=${encodeURIComponent(user.username)}`
+  `wzmanager://auth?discordId=${user.id}&username=${encodeURIComponent(user.username)}`
 );
 
   } catch (err) {
