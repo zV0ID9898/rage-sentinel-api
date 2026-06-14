@@ -75,7 +75,6 @@ app.get("/auth/discord/callback", async (req, res) => {
 res.send(`
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="utf-8">
 <title>Autenticación completada</title>
@@ -93,32 +92,19 @@ text-align:center;
 ">
 
 <div>
-
-<h2>
-Autenticación completada
-</h2>
-
-<p>
-Regresando a Warzone Manager...
-</p>
-
+  <h2>Autenticación completada</h2>
+  <p>Abriendo Warzone Manager...</p>
+  <p style="opacity:.7;font-size:14px;">
+    Si la aplicación ya se abrió, puedes cerrar esta ventana.
+  </p>
 </div>
 
 <script>
-
 window.location.href =
 "wzmanager://auth?discordId=${user.id}&username=${encodeURIComponent(user.username)}";
-
-setTimeout(() => {
-
-  window.close();
-
-}, 1500);
-
 </script>
 
 </body>
-
 </html>
 `);
 
