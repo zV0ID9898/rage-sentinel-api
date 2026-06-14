@@ -72,22 +72,56 @@ app.get("/auth/discord/callback", async (req, res) => {
 
     const user = userRes.data;
 
-    const FRONTEND_URL =
-  "https://TU-FRONTEND.com";
 
-res.redirect(
-  `wzmanager://auth?discordId=${user.id}&username=${encodeURIComponent(user.username)}`
-);
+res.send(`
+<!DOCTYPE html>
+<html>
 
-  } catch (err) {
+<head>
+<meta charset="utf-8">
+<title>Autenticación completada</title>
+</head>
 
-    console.error(err);
+<body style="
+background:#111;
+color:white;
+font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+">
 
-    res.status(500).json({
-      error: "OAuth error"
-    });
+<div>
 
-  }
+<h2>
+Autenticación completada
+</h2>
+
+<p>
+Regresando a Warzone Manager...
+</p>
+
+</div>
+
+<script>
+
+window.location.href =
+"wzmanager://auth?discordId=${user.id}&username=${encodeURIComponent(user.username)}";
+
+setTimeout(() => {
+
+  window.close();
+
+}, 1500);
+
+</script>
+
+</body>
+
+</html>
+`);
 
 });
 client.once("ready", () => {
